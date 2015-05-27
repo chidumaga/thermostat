@@ -1,12 +1,12 @@
 function Thermostat(){
   this.temperature = 20;
   this.isPowerSaving = true;
-
   }
 
 Thermostat.prototype.increase = function() {
   if(this.isPowerSaving && this.temperature >= 26){
-    return "Too high!";}
+    return "Too high!";
+  }
   else if(this.temperature >= 33){
     return "Too high!";
   }

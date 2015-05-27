@@ -9,27 +9,51 @@
 
   </div>
 
-  <button onclick="DownButton()" id='down'><<</button>
-  <button onclick="UpButton()" id='up'>>></button>
+  <button onclick="DownButton()" id='down'> Decrease </button>
+  <button onclick="UpButton()" id='up'> Increase </button>
+  <form action="">
+    <input type="checkbox" ID="power_saving" value="power_saving">Power saving mode
+  </form>
+
+  <div id="warning">
+
+  </div>
 
   <script>
 
   therm = new Thermostat();
+
+  var rb = document.getElementById("power_saving");
+
+  function setPowerSaving(){
+    if(rb.checked){
+      therm.isPowerSaving = true;
+    } else {
+      therm.isPowerSaving = false;
+    }
+  }
+
   document.getElementById("temperature").innerHTML = therm.temperature;
 
   function UpButton(){
-    therm.increase();
+    var increase = therm.increase();
     document.getElementById("temperature").innerHTML = therm.temperature;
+    setPowerSaving();
+    if(increase == "Too high!"){
+      document.getElementById("warning").innerHTML = increase;
+    }
+    document.body.style.background = therm.colourify();
   }
 
   function DownButton(){
-    therm.decrease();
+    decrease = therm.decrease();
     document.getElementById("temperature").innerHTML = therm.temperature;
+    if(decrease == "Too low!"){
+      document.getElementById("warning").innerHTML = decrease;
+    }
+    document.body.style.background = therm.colourify();
   }
 
-    // therm = new Thermostat();
-    // document.getElementById("temperature").innerHTML = therm.temperature;
-    // document.getElementById("up").onclick = therm.increase();
 
   </script>
 
