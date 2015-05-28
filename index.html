@@ -1,6 +1,7 @@
 <html>
 <head>
   <script src='./src/thermostat.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -17,6 +18,20 @@
 
   <div id="warning">
 
+  </div>
+
+  <div id="cities">
+
+    <p> Find the weather for cities around the world</p>
+
+    <input type="text" id="city">
+    <button onclick="GetWeather()">Get weather</button>
+
+  </div>
+
+  <br>
+
+  <div id="city_weather">
   </div>
 
   <script>
@@ -52,6 +67,14 @@
       document.getElementById("warning").innerHTML = decrease;
     }
     document.body.style.background = therm.colourify();
+  }
+
+  function GetWeather(){
+    var city = document.getElementById("city").value;
+
+    $.get("http://api.openweathermap.org/data/2.5/weather?q="+city, function(data){
+      city_weather.innerHTML = "The weather in "+ city + ": " + data.weather[0].description;
+    });
   }
 
 
